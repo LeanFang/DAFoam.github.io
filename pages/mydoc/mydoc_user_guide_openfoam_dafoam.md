@@ -44,7 +44,6 @@ The 0.orig file contains the initial field values as well as the field boundary 
 The exact setup of the 0.orig file (which field values to include and what their initial values should be) depends on the case being setup. To serve as an example we can open the 0.orig/U file. The first line is the `dimensions [0 1 -1 0 0 0 0];` line. This line specifies the units used for the field value. For the NACA 0012 case the initial velocity condition is 10 m/s in the x direction, hence `internalField uniform (10 0 0);` is set. The following block (`boundaryField`) is where the actual boundary conditions are defined. Refer to the following figure for the setup of the internal and boundary fields.
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/user_guide/analysis_discretization.png" style="width:700px !important;" />
-
 Fig. 1. A schematic of description of the internal and boundary fields for a 2D simulation domain
 
 
@@ -78,6 +77,7 @@ boundaryField
 
 The `inout` boundary condition is common for wing simulations. Inout refers to the far field domain inlet condition and `wing` refers to the wing surface. The `value uniform (0 0 0);` for the airfoil provides a no slip boundary condition on the wall. The `"inout"` boundary condition is the patch name for the far field surface. The `"inletOutlet"` is a special condition for the far field velocity. Similar setups follow for the other field values (p, nuTilda, k etc.). 
 
+We use the `symmetry` boundary condition for the symmetry plane.
 
 ### 2.2 FFD
 The FFD folder contains two files: a genFFD.py script and a wingFFD.xyz file. The genFFD.py script is used to generate the FFD points and export their coordinates to the plot3D format needed in the simulation. It should be noted that this script generates a clean FFD box, not body fitted FFDs (which can be done using [ICEM CFD](https://github.com/mdolab/dafoam/discussions/652) amongst other methods). The FFD points can be easily adjusted using this file in terms of number of FFD points and their locations:
